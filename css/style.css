@@ -90,20 +90,23 @@ body{
 	text-align: center;
 }
 
-#timeline{
+.vertical-timeline {
+	position: relative;
+}
+.vertical-timeline .timeline-items{
 	width: 600px;
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
-#timeline .post{
+.vertical-timeline .post{
 	width: 271px;
 	margin: 0 0 10px 0;
 	float: left;
 }
-#timeline .post.last{
+.vertical-timeline .post.last{
 	margin-bottom: 0;
 }
-#timeline .post .inner{
+.vertical-timeline .post .inner{
 	position: relative;
 	width: 247px;
 	padding: 11px;
@@ -118,13 +121,13 @@ body{
 	-moz-box-shadow:  0px 1px 1px 0px #adadad;
 	box-shadow:  0px 1px 1px 0px #adadad;
 }
-#timeline .post.right{
+.vertical-timeline .post.right{
 	float: right;
 }
-#timeline .item .timestamp{
+.vertical-timeline .item .timestamp{
 	display: none;
 }
-#timeline .post h3{
+.vertical-timeline .post h3{
 	margin: 0;
 	font-family: Georgia, serif;
 	font-size: 16px;
@@ -133,26 +136,26 @@ body{
 	padding-right: 30px;
 	line-height: 1.3;
 }
-#timeline .post .caption{
+.vertical-timeline .post .caption{
 	color: #9d9d9d;
 	font-family: Georgia, sans-serif;
 	font-size: 12px;
 	margin-top: 4px;
 }
-#timeline .post .body{
+.vertical-timeline .post .body{
 	margin-top: 10px;
 }
-#timeline .post .body img{
+.vertical-timeline .post .body img{
 	max-width: 247px;
 }
-#timeline .post .text{
+.vertical-timeline .post .text{
 	color: #393939;
 	font-family: Georgia, sans-serif;
 	font-size: 12px;
 	margin: 10px 0;
 	line-height: 1.5;
 }
-#timeline .post a.open-close{
+.vertical-timeline .post a.open-close{
 	background: transparent url(../img/button-up-down-arrow.png) no-repeat;
 	height: 17px;
 	width: 16px;
@@ -160,18 +163,18 @@ body{
 	right: 11px;
 	top: 11px;
 }
-#timeline .post.closed a.open-close{
+.vertical-timeline .post.closed a.open-close{
 	background-position: left bottom;
 }
-#timeline .post.closed .title{
+.vertical-timeline .post.closed .title{
 	display: table;
 	min-height: 40px;
 }
-#timeline .post.closed .title h3{
+.vertical-timeline .post.closed .title h3{
 	display: table-cell;
 	vertical-align: middle;
 }
-#timeline .post a.more{
+.vertical-timeline .post a.more{
 	color: #87b2d3;
 	text-decoration: none;
 	font-size: 12px;
@@ -191,10 +194,10 @@ body{
 	-moz-box-shadow:  0px 1px 1px 0px #87b2d3;
 	box-shadow:  0px 1px 1px 0px #87b2d3;
 }
-#timeline .post a.more:hover{
+.vertical-timeline .post a.more:hover{
 	background-color: #FFF;
 }
-#timeline .post a.share-trigger{
+.vertical-timeline .post a.share-trigger{
 	text-decoration: none;
 	font-size: 12px;
 	font-weight: bold;
@@ -211,17 +214,17 @@ body{
 	-moz-box-shadow:  0px 1px 1px 0px #87b2d3;
 	box-shadow:  0px 1px 1px 0px #87b2d3;
 }
-#timeline .post a.share-trigger.over,
-#timeline .post a.share-trigger:hover{
+.vertical-timeline .post a.share-trigger.over,
+.vertical-timeline .post a.share-trigger:hover{
 	background-color: #FFF;
 }
-#timeline .post .share{
+.vertical-timeline .post .share{
 	position: relative;
 	float: right;
 	width: 30px;
 	height: 30px;
 }
-#timeline .post .share-popup{
+.vertical-timeline .post .share-popup{
 	display: none;
 	background: transparent url(../img/popup.png) no-repeat;
 	width: 166px;
@@ -232,12 +235,12 @@ body{
 	text-align: center;
 	padding-top: 15px;
 }
-#timeline .post .share-popup .twitter-share-button{
+.vertical-timeline .post .share-popup .twitter-share-button{
 	position: absolute;
 	left: 20px;
 	top: 15px;
 }
-#timeline .post .share-popup .facebook-share-button{
+.vertical-timeline .post .share-popup .facebook-share-button{
 	position: absolute;
 	right: 20px;
 	top: 12px;
@@ -248,7 +251,7 @@ body{
 .lt-ie8 #timeline .post .share-popup .facebook-share-button{
 	top: 16px;
 }
-#timeline .post .date{
+.vertical-timeline .post .date{
 	color: #6a6a6a;
 	font-size: 11px;
 	text-align: center;
@@ -259,35 +262,35 @@ body{
 	height: 21px;
 	line-height: 20px;
 }
-#timeline .post.left .date{
+.vertical-timeline .post.left .date{
 	background: transparent url(../img/tab-left.png) no-repeat right;
 	right: -54px;
 }
-#timeline .post.right .date{
+.vertical-timeline .post.right .date{
 	background: transparent url(../img/tab-right.png) no-repeat left;
 	left: -54px;
 }
-#timeline .year-marker {
+.vertical-timeline .year-marker {
 	float: left;
 	width: 80px;
 	margin: 50px 0 15px 0;
 }
-#timeline .year-marker.top{
+.vertical-timeline .year-marker.top{
 	margin-top: 0;
 }
-#timeline .year-marker .inner{
+.vertical-timeline .year-marker .inner{
 	width: 76px;
 	height: 26px;
 	padding: 2px;
 	background-color: #FFF;
 }
-#timeline .year-marker .inner2{
+.vertical-timeline .year-marker .inner2{
 	background-color: #434a50;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 }
-#timeline .year{
+.vertical-timeline .year{
 	text-align: center;
 	color: #fff;
 	font-size: 14px;
@@ -296,16 +299,16 @@ body{
 	line-height: 26px;
 }
 
-#buttons{
+.controls{
 	text-align: center;
 	margin: 30px 0 15px 0;
 	height: 30px;
 }
-#buttons div{
+.controls div{
 	display: inline;
 	padding: 0 10px;
 }
-#buttons a{
+.controls a{
 	width: 126px;
 	height: 28px;
 	border: 1px #adadad solid;
@@ -319,8 +322,8 @@ body{
 	background-color: #FFF;
 	color: #3b3b3b;
 }
-#buttons a.active:hover,
-#buttons a.active{
+.controls a.active:hover,
+.controls a.active{
 	background-color: #f6f6f6;
 	color: #a9a9a9;
 	-webkit-box-shadow:  none;
@@ -328,44 +331,44 @@ body{
 	box-shadow:  none;
 	cursor: default;
 }
-#buttons a:hover{
+.controls a:hover{
 	-webkit-box-shadow:  0px 1px 1px 0px #adadad;
 	-moz-box-shadow:  0px 1px 1px 0px #adadad;
 	box-shadow:  0px 1px 1px 0px #adadad;
 }
-#buttons a span{
+.controls a span{
 	padding-right: 15px;
 	background-position: right -20px;
 }
-#buttons a.active span{
+.controls a.active span{
 	background-position: right 4px;
 }
-#buttons a.expand-all span,
-#buttons a.sort-newest span{
+.controls a.expand-all span,
+.controls a.sort-newest span{
 	background-image: url(../img/up-arrows.png);
 	background-repeat: no-repeat;
 }
-#buttons a.collapse-all span,
-#buttons a.sort-oldest span{
+.controls a.collapse-all span,
+.controls a.sort-oldest span{
 	background-image: url(../img/down-arrows.png);
 	background-repeat: no-repeat;
 }
 
-#line-container{
+.line-container{
 	width: 4px;
 	text-align: center;
 	margin: 0 auto;
 	display: block;
 }
-.isotope #line{
+.line-container .line{
 	margin: 0 auto;
 	background-color: #b3b6b8;
 	display: block;
-	float: left;
 	height: 100%;
-	left: 298px;
 	width: 4px;
 	position: absolute;
+	left: 296px;
+	top: 61px;
 }
 
 /**** Isotope Filtering ****/
@@ -423,7 +426,7 @@ body{
 
 
 @media only screen and (min-width: 35em) {
-  
+
 
 }
 
@@ -438,13 +441,13 @@ body{
 .clearfix { *zoom: 1; }
 
 @media print {
-  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
+  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; }
   abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
   pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; } 
+  thead { display: table-header-group; }
   tr, img { page-break-inside: avoid; }
   img { max-width: 100% !important; }
   @page { margin: 0.5cm; }

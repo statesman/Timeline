@@ -25,24 +25,8 @@
 
     <div role="main" class="clearfix">
 
-      <div id="buttons">
-        <div id="expand-collapse-buttons">
-          <a class="expand-all active" href="#"><span>EXPAND ALL</span></a>
-          <a class="collapse-all" href="#"><span>COLLAPSE ALL</span></a>
-        </div>
-        <div id="sort-buttons">
-          <a class="sort-newest active" href="#"><span>NEWEST FIRST</span></a>
-          <a class="sort-oldest" href="#"><span>OLDEST FIRST</span></a>
-        </div>
-      </div>
-
-      <div id="timeline">
-
-        <div id="line-container">
-          <div id="line"></div>
-        </div>
-
-      </div>
+      <div id="timeline"></div>
+      <div id="timeline-2"></div>
 
     </div>
 
@@ -56,6 +40,12 @@
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
 
+  <script id="line-template" type="text/x-handlebars-tempalte">
+    <div class="line-container">
+      <div class="line"></div>
+    </div>
+  </script>
+
   <script id="year-marker-template" type="text/x-handlebars-template">
     <div class="item year-marker">
       <div class="inner">
@@ -63,6 +53,19 @@
           <div class="timestamp">{{timestamp}}</div>
           <div class="year">{{year}}</div>
         </div>
+      </div>
+    </div>
+  </script>
+
+  <script id="controls-template" type="text/x-handlebars-template">
+    <div class="controls">
+      <div class="expand-collapse-buttons">
+        <a class="expand-all active" href="#"><span>EXPAND ALL</span></a>
+        <a class="collapse-all" href="#"><span>COLLAPSE ALL</span></a>
+      </div>
+      <div class="sort-buttons">
+        <a class="sort-newest active" href="#"><span>NEWEST FIRST</span></a>
+        <a class="sort-oldest" href="#"><span>OLDEST FIRST</span></a>
       </div>
     </div>
   </script>
