@@ -4,54 +4,13 @@ var timelineConfig = {
 	sheetName: 'Posts' // change to name of spreadsheet 'sheet' that contains the data
 };
 
-var Timeline = function(el, data, tabletop) {
+var Timeline = function(el, data) {
 	this.$el = $(el);
-	this.$el.addClass('vertical-timeline');
+	this.data = data;
 
-	var controlTemplate = Handlebars.compile($('#controls-template').html());
-	this.$el.append(controlTemplate());
-
-	this.$el.append('<div class="timeline-items"></div>');
-	this.$timeline = this.$el.find('.timeline-items');
-
-	var direction = 'newest';
-
-	// load the Handlebar templates into memory
-	var postTemplate  = Handlebars.compile($('#post-template').html());
-	var yearMarkerTemplate  = Handlebars.compile($('#year-marker-template').html());
+	this._render();
 
 	var self = this;
-
-	var years = [];
-
-	$.each(tabletop.sheets(timelineConfig.sheetName).all(), function(i, val){
-		// save the years so we can create year markers
-		var year = new Date(val.timestamp).getFullYear();
-		if (years.indexOf(year) < 0) {
-			years[years.length] = year;
-		}
-
-		// combine data & templqate
-		var html = postTemplate(val);
-		self.$timeline.append(html);
-	});
-
-	// add a year marker for each year that has a post
-	$.each(years, function(i, val){
-		var timestamp;
-		if (direction == 'newest') {
-			timestamp = self._getTimestamp(val, false);
-		}
-		else {
-			timestamp = self._getTimestamp(val, true);
-		}
-		var context = {year: val, timestamp: timestamp};
-		var html = yearMarkerTemplate(context);
-		self.$timeline.append(html);
-	});
-
-	var lineTemplate = Handlebars.compile($('#line-template').html());
-	this.$el.append(lineTemplate());
 
 	this.$timeline.imagesLoaded(function(){
 		this.isotope({
@@ -105,6 +64,57 @@ var Timeline = function(el, data, tabletop) {
 
 	this._adjustLine();
 	this.$el.resize($.proxy(this._adjustLine, this));
+};
+
+Timeline.prototype._render = function() {
+	var self = this;
+
+	var direction = 'newest';
+
+	// Add a class to the passed parent el so we can style it
+	this.$el.addClass('vertical-timeline');
+
+	// Render the controls
+	var controlTemplate = Handlebars.compile($('#controls-template').html());
+	this.$el.append(controlTemplate());
+
+	// Render the wrapper for timeline items
+	this.$timeline = $('<div class="timeline-items"></div>');
+	this.$timeline.appendTo(this.$el);
+
+	// load the Handlebar templates into memory
+	var postTemplate  = Handlebars.compile($('#post-template').html());
+	var yearMarkerTemplate  = Handlebars.compile($('#year-marker-template').html());
+
+	var years = [];
+	$.each(this.data, function(i, val){
+		// save the years so we can create year markers
+		var year = new Date(val.timestamp).getFullYear();
+		if (years.indexOf(year) < 0) {
+			years[years.length] = year;
+		}
+
+		// combine data & templqate
+		var html = postTemplate(val);
+		self.$timeline.append(html);
+	});
+
+	// add a year marker for each year that has a post
+	$.each(years, function(i, val){
+		var timestamp;
+		if (direction == 'newest') {
+			timestamp = self._getTimestamp(val, false);
+		}
+		else {
+			timestamp = self._getTimestamp(val, true);
+		}
+		var context = {year: val, timestamp: timestamp};
+		var html = yearMarkerTemplate(context);
+		self.$timeline.append(html);
+	});
+
+	var lineTemplate = Handlebars.compile($('#line-template').html());
+	this.$el.append(lineTemplate());
 };
 
 Timeline.prototype._setupControls = function() {
@@ -199,7 +209,7 @@ $(function() {
 	Tabletop.init({
 		key: timelineConfig.key,
 		callback: function(data, tabletop) {
-			new Timeline('#timeline', data, tabletop);
+			new Timeline('#timeline', tabletop.sheets(timelineConfig.sheetName).all());
 		},
 		wanted: [timelineConfig.sheetName],
 		postProcess: function(el){
