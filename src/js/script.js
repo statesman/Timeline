@@ -65,16 +65,11 @@ Timeline.prototype._render = function() {
 	this.$el.addClass('vertical-timeline');
 
 	// Render the controls
-	var controlTemplate = Handlebars.compile($('#controls-template').html());
-	this.$el.append(controlTemplate());
+	this.$el.append(JST.controls());
 
 	// Render the wrapper for timeline items
 	this.$timeline = $('<div class="timeline-items"></div>');
 	this.$timeline.appendTo(this.$el);
-
-	// load the Handlebar templates into memory
-	var postTemplate  = Handlebars.compile($('#post-template').html());
-	var yearMarkerTemplate  = Handlebars.compile($('#year-marker-template').html());
 
 	var years = [];
 	$.each(this.data, function(i, val){
@@ -85,8 +80,7 @@ Timeline.prototype._render = function() {
 		}
 
 		// combine data & templqate
-		var html = postTemplate(val);
-		self.$timeline.append(html);
+		self.$timeline.append(JST.post(val));
 	});
 
 	// add a year marker for each year that has a post
@@ -99,12 +93,12 @@ Timeline.prototype._render = function() {
 			timestamp = self._getTimestamp(val, true);
 		}
 		var context = {year: val, timestamp: timestamp};
-		var html = yearMarkerTemplate(context);
+		var html = JST.year(context);
 		self.$timeline.append(html);
 	});
 
-	var lineTemplate = Handlebars.compile($('#line-template').html());
-	this.$el.append(lineTemplate());
+	// Add line
+	this.$el.append('<div class="line-container"><div class="line"></div></div>');
 };
 
 Timeline.prototype._setupControls = function() {

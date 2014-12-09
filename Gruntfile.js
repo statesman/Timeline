@@ -14,6 +14,22 @@ module.exports = function(grunt) {
       }
     },
 
+    // Pre-compile Handlebars templates
+    handlebars: {
+      options: {
+        processName: function(filePath) {
+          var path = filePath.toLowerCase(),
+          pieces = path.split("/");
+          return pieces[pieces.length - 1].split(".")[0];
+        }
+      },
+      compile: {
+        files: {
+          "build/templates.js": "src/templates/**.hbs"
+        }
+      }
+    },
+
     // Transpile LESS
     less: {
       options: {
@@ -35,7 +51,8 @@ module.exports = function(grunt) {
   // Load the task plugins
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
 
-  grunt.registerTask('default', ['copy', 'less']);
+  grunt.registerTask('default', ['copy', 'handlebars', 'less']);
 
 };

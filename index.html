@@ -45,82 +45,15 @@
     <div role="main" class="clearfix">
       <div id="timeline"></div>
     </div>
-
   </div>
 
   <script src="/bower_components/jquery/jquery.js"></script>
-  <script src="/bower_components/handlebars/handlebars.js"></script>
+  <script src="/bower_components/handlebars/handlebars.runtime.js"></script>
   <script src="/src/js/helpers.js"></script>
   <script src="/bower_components/tabletop/src/tabletop.js"></script>
   <script src="/bower_components/imagesloaded/imagesloaded.pkgd.js"></script>
   <script src="/bower_components/isotope/jquery.isotope.js"></script>
+  <script src="/build/templates.js"></script>
   <script src="/src/js/script.js"></script>
-
-  <script id="line-template" type="text/x-handlebars-tempalte">
-    <div class="line-container">
-      <div class="line"></div>
-    </div>
-  </script>
-
-  <script id="year-marker-template" type="text/x-handlebars-template">
-    <div class="item year-marker">
-      <div class="inner">
-        <div class="inner2">
-          <div class="timestamp">{{timestamp}}</div>
-          <div class="year">{{year}}</div>
-        </div>
-      </div>
-    </div>
-  </script>
-
-  <script id="controls-template" type="text/x-handlebars-template">
-    <div class="controls">
-      <div class="expand-collapse-buttons">
-        <a class="expand-all active" href="#"><span>EXPAND ALL</span></a>
-        <a class="collapse-all" href="#"><span>COLLAPSE ALL</span></a>
-      </div>
-      <div class="sort-buttons">
-        <a class="sort-newest active" href="#"><span>NEWEST FIRST</span></a>
-        <a class="sort-oldest" href="#"><span>OLDEST FIRST</span></a>
-      </div>
-    </div>
-  </script>
-
-  <script id="post-template" type="text/x-handlebars-template">
-    <div class="item post">
-      <div class="inner">
-        <div class="timestamp">{{timestamp}}</div>
-        <div class="title"><h3>{{title}}</h3></div>
-        <div class="date">{{display_date}}</div>
-        <div class="body">
-          {{#if photo_url}}
-            <img src="{{photo_url}}" alt="">
-          {{/if}}
-          {{#if caption}}
-            <div class="caption">({{caption}})</div>
-          {{/if}}
-          {{#if body}}
-            <div class="text">{{body}}</div>
-          {{/if}}
-          <div class="clearfix">
-            {{#if read_more_url}}
-              <a target="_blank" class="more" href="{{read_more_url}}">READ MORE</a>
-              <div class="share">
-                <a href="#" class="share-trigger"></a>
-                <div class="share-popup">
-                  Share:
-                  <a href="{{fbUrl read_more_url}}" target="_blank" class="share-button facebook-share-button"><i class="fa fa-facebook-square"></i></a>
-                  <a href="{{twUrl read_more_url}}" target="_blank" class="share-button twitter-share-button"><i class="fa fa-twitter"></i></a>
-                  <a href="{{gpUrl read_more_url}}" target="_blank" class="share-button gplus-share-button"><i class="fa fa-google-plus"></i></a>
-                </div>
-              </div>
-            {{/if}}
-          </div>
-        </div>
-        <a href="#" class="open-close"></a>
-      </div>
-    </div>
-  </script>
-
 </body>
 </html>
