@@ -1,0 +1,41 @@
+From 23270464b6a1d411df56a8d73efc3322e1cd03b2 Mon Sep 17 00:00:00 2001
+From: Andrew Chavez <adchavez@gmail.com>
+Date: Tue, 9 Dec 2014 15:04:24 -0600
+Subject: [PATCH 3/7] Use the template to render open/close
+
+---
+ index.html   | 1 +
+ js/script.js | 5 -----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/index.html b/index.html
+index f9515dc..8f8347c 100644
+--- a/index.html
++++ b/index.html
+@@ -99,6 +99,7 @@
+             {{/if}}
+           </div>
+         </div>
++        <a href="#" class="open-close"></a>
+       </div>
+     </div>
+   </script>
+diff --git a/js/script.js b/js/script.js
+index a8b84c3..ec53fb6 100644
+--- a/js/script.js
++++ b/js/script.js
+@@ -35,11 +35,6 @@ var Timeline = function(el, data) {
+ 	$.getScript('//static.ak.fbcdn.net/connect.php/js/FB.Share');
+ 	$.getScript('//platform.twitter.com/widgets.js');
+ 
+-	// add open/close buttons to each post
+-	this.$el.each(function(){
+-		$(this).find('.inner').append('<a href="#" class="open-close"></a>');
+-	});
+-
+ 	this.$el.find('.item a.open-close').click(function(e){
+ 		$(this).siblings('.body').slideToggle(function(){
+ 			self.$timeline.isotope('reLayout');
+-- 
+1.9.4.msysgit.1
+
