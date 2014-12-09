@@ -125,25 +125,24 @@ Timeline.prototype._setupControls = function() {
 	});
 
 	controls.find('.sort-buttons a').click(function(e){
-							var $this = $(this);
-							// don't proceed if already selected
-							if ($this.hasClass('active')) {
-								return false;
-							}
-
+		var $this = $(this);
+		// don't proceed if already selected
+		if ($this.hasClass('active')) {
+			return false;
+		}
 		controls.find('.sort-buttons a').removeClass('active');
-							$this.addClass('active');
-							var $yearMarkers = $('.year-markers');
-							if ($this.hasClass('sort-newest')){
+		$this.addClass('active');
+		var $yearMarkers = $('.year-markers');
+		if ($this.hasClass('sort-newest')){
 			self._updateYearMarkers(false);
 			self.$timeline.isotope('reloadItems').isotope({sortAscending: false});
-							}
-							else{
+		}
+		else{
 			self._updateYearMarkers(true);
 			self.$timeline.isotope('reloadItems').isotope({sortAscending: true});
-							}
-							e.preventDefault();
-						});
+		}
+		e.preventDefault();
+	});
 };
 
 Timeline.prototype._adjustLine = function() {
@@ -202,81 +201,82 @@ $(function() {
 			el['read_more_url'] = el['readmoreurl'];
 			el['photo_url'] = el['photourl'];
 		}
-					});
+	});
 
+});
+
+/*
+* Isotope custom layout mode spineAlign
+*/
+
+$.Isotope.prototype._spineAlignReset = function() {
+	this.spineAlign = {
+		colA: 0,
+		colB: 0,
+		lastY: -60
+	};
+};
+
+$.Isotope.prototype._spineAlignLayout = function( $elems ) {
+	var instance = this,
+	props = this.spineAlign,
+	gutterWidth = Math.round( this.options.spineAlign && this.options.spineAlign.gutterWidth ) || 0,
+	centerX = Math.round(this.element.width() / 2);
+
+	$elems.each(function(i, val){
+		var $this = $(this);
+		$this.removeClass('last').removeClass('top');
+		if (i == $elems.length - 1)
+			$this.addClass('last');
+			var x, y;
+			if ($this.hasClass('year-marker')){
+				var width = $this.width();
+				x = centerX - (width / 2);
+				if (props.colA >= props.colB){
+					y = props.colA;
+					if (y == 0) $this.addClass('top');
+					props.colA += $this.outerHeight(true);
+					props.colB = props.colA;
+				}
+				else{
+					y = props.colB;
+					if (y == 0) $this.addClass('top');
+					props.colB += $this.outerHeight(true);
+					props.colA = props.colB;
+				}
+			}
+			else{
+				$this.removeClass('left').removeClass('right');
+				var isColA = props.colB >= props.colA;
+				if (isColA)
+					$this.addClass('left');
+					else
+						$this.addClass('right');
+						x = isColA ?
+						centerX - ( $this.outerWidth(true) + gutterWidth / 2 ) : // left side
+						centerX + (gutterWidth / 2); // right side
+						y = isColA ? props.colA : props.colB;
+						if (y - props.lastY <= 60){
+							var extraSpacing = 60 - Math.abs(y - props.lastY);
+							$this.find('.inner').css('marginTop', extraSpacing);
+							props.lastY = y + extraSpacing;
+						}
+						else{
+							$this.find('.inner').css('marginTop', 0);
+							props.lastY = y;
+						}
+						props[( isColA ? 'colA' : 'colB' )] += $this.outerHeight(true);
+					}
+					instance._pushPosition( $this, x, y );
 				});
+			};
 
+$.Isotope.prototype._spineAlignGetContainerSize = function() {
+	var size = {};
+	size.height = this.spineAlign[( this.spineAlign.colB > this.spineAlign.colA ? 'colB' : 'colA' )];
+	return size;
+};
 
-
-				/*
-				* Isotope custom layout mode spineAlign
-				*/
-
-				$.Isotope.prototype._spineAlignReset = function() {
-					this.spineAlign = {
-						colA: 0,
-						colB: 0,
-						lastY: -60
-					};
-				};
-				$.Isotope.prototype._spineAlignLayout = function( $elems ) {
-					var instance = this,
-					props = this.spineAlign,
-					gutterWidth = Math.round( this.options.spineAlign && this.options.spineAlign.gutterWidth ) || 0,
-					centerX = Math.round(this.element.width() / 2);
-
-					$elems.each(function(i, val){
-						var $this = $(this);
-						$this.removeClass('last').removeClass('top');
-						if (i == $elems.length - 1)
-							$this.addClass('last');
-							var x, y;
-							if ($this.hasClass('year-marker')){
-								var width = $this.width();
-								x = centerX - (width / 2);
-								if (props.colA >= props.colB){
-									y = props.colA;
-									if (y == 0) $this.addClass('top');
-									props.colA += $this.outerHeight(true);
-									props.colB = props.colA;
-								}
-								else{
-									y = props.colB;
-									if (y == 0) $this.addClass('top');
-									props.colB += $this.outerHeight(true);
-									props.colA = props.colB;
-								}
-							}
-							else{
-								$this.removeClass('left').removeClass('right');
-								var isColA = props.colB >= props.colA;
-								if (isColA)
-									$this.addClass('left');
-									else
-										$this.addClass('right');
-										x = isColA ?
-										centerX - ( $this.outerWidth(true) + gutterWidth / 2 ) : // left side
-										centerX + (gutterWidth / 2); // right side
-										y = isColA ? props.colA : props.colB;
-										if (y - props.lastY <= 60){
-											var extraSpacing = 60 - Math.abs(y - props.lastY);
-											$this.find('.inner').css('marginTop', extraSpacing);
-											props.lastY = y + extraSpacing;
-										}
-										else{
-											$this.find('.inner').css('marginTop', 0);
-											props.lastY = y;
-										}
-										props[( isColA ? 'colA' : 'colB' )] += $this.outerHeight(true);
-									}
-									instance._pushPosition( $this, x, y );
-								});
-							};
-							$.Isotope.prototype._spineAlignGetContainerSize = function() {
-								var size = {};
-								size.height = this.spineAlign[( this.spineAlign.colB > this.spineAlign.colA ? 'colB' : 'colA' )];
-								return size;
-							};
-							$.Isotope.prototype._spineAlignResizeChanged = function() {
-								return true;
-							};
+$.Isotope.prototype._spineAlignResizeChanged = function() {
+	return true;
+};
