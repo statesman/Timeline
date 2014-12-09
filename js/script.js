@@ -10,8 +10,6 @@ var Timeline = function(el, data) {
 
 	this._render();
 
-	var self = this;
-
 	this.$timeline.imagesLoaded(function(){
 		this.isotope({
 			itemSelector : '.item',
@@ -31,9 +29,7 @@ var Timeline = function(el, data) {
 							});
 	});
 
-	// load scripts after all the html has been set
-	$.getScript('//static.ak.fbcdn.net/connect.php/js/FB.Share');
-	$.getScript('//platform.twitter.com/widgets.js');
+	var self = this;
 
 	this.$el.find('.item a.open-close').click(function(e){
 		$(this).siblings('.body').slideToggle(function(){
