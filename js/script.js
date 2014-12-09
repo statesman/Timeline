@@ -54,7 +54,6 @@ var Timeline = function(el, data) {
 	this._setupControls();
 
 	this._adjustLine();
-	this.$el.resize($.proxy(this._adjustLine, this));
 };
 
 Timeline.prototype._render = function() {
