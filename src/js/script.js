@@ -1,6 +1,8 @@
 // Script variables
+// Gault dig spreadsheet url: https://docs.google.com/spreadsheet/pub?key=0AvZh5Gsgu1WvdDR4eEdpREh0akFyQ3ZzcFFkWEJOZGc&output=html
+// Note change below to reverse sort order to support BP dates in gault-dig. They will need to change back for any other project.
 var timelineConfig = {
-	key: '0AvZh5Gsgu1WvdFo5VjB3dnBhSlVzN2hxejdsNmpHTFE',
+	key: '0AvZh5Gsgu1WvdDR4eEdpREh0akFyQ3ZzcFFkWEJOZGc',
 	sheetName: 'Posts' // change to name of spreadsheet 'sheet' that contains the data
 };
 
@@ -135,11 +137,11 @@ Timeline.prototype._setupControls = function() {
 		var $yearMarkers = $('.year-markers');
 		if ($this.hasClass('sort-newest')){
 			self._updateYearMarkers(false);
-			self.$timeline.isotope('reloadItems').isotope({sortAscending: false});
+			self.$timeline.isotope('reloadItems').isotope({sortAscending: true}); // false changed to true to support BP dates gault-dig
 		}
 		else{
 			self._updateYearMarkers(true);
-			self.$timeline.isotope('reloadItems').isotope({sortAscending: true});
+			self.$timeline.isotope('reloadItems').isotope({sortAscending: false}); // true changed to false to support BP dates for gault-dig
 		}
 		e.preventDefault();
 	});
