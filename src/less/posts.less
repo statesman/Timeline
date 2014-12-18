@@ -50,8 +50,18 @@
       top: 19px;
       display: block;
       width: 54px;
-      height: 21px;
-      line-height: 20px;
+      line-height: 15px;
+      box-shadow: 0 1px 1px 0 #adadad;
+      border: 1px #adadad solid;
+      background: white;
+      padding: 4px 0;
+      .shadow-cover {
+        height: 120%;
+        width: 5px;
+        top: -1px;
+        background: white;
+        position: absolute;
+      }
     }
 
     .inner{
@@ -71,24 +81,32 @@
     }
 
     a.open-close{
-      background: transparent url(../img/button-up-down-arrow.png) no-repeat;
+      color: rgb(213, 213, 213);
       height: 17px;
       width: 16px;
       position: absolute;
       right: 11px;
       top: 11px;
+      text-decoration: none;
+      .fa-caret-square-o-down {
+        display: none;
+      }
     }
 
     a.share-trigger{
+      color: #87b2d3;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 15px;
+      line-height: 29px;
       font-weight: bold;
       text-align: center;
       width: 28px;
       height: 28px;
       border: 1px #87b2d3 solid;
-      background: #d6e5f0 url(../img/icon-share.png) no-repeat center center;
+      background: #d6e5f0;
       display: block;
+      position: absolute;
+      bottom: 0;
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
       border-radius: 2px;
@@ -103,22 +121,48 @@
     }
 
     .share{
-      position: relative;
-      float: right;
+      position: absolute;
       width: 30px;
-      height: 30px;
+      height: 50px;
+      right: 11px;
+      bottom: 11px;
     }
 
     .share-popup{
-      display: none;
-      background: transparent url(../img/popup.png) no-repeat;
-      width: 166px;
-      height: 50px;
-      position: absolute;
-      top: -61px;
-      left: -126px;
+      top: -22px;
+      left: -55px;
       text-align: center;
-      padding-top: 15px;
+      padding: 8px 3px 6px 3px;
+      position: relative;
+      background: #fff;
+      border: 1px solid #adadad;
+      height: 18px;
+      width: 130px;
+
+      &:after,
+      &:before {
+      	top: 100%;
+      	left: 50%;
+      	border: solid transparent;
+      	content: " ";
+      	height: 0;
+      	width: 0;
+      	position: absolute;
+      	pointer-events: none;
+      }
+
+      &:after {
+      	border-color: rgba(255, 255, 255, 0);
+      	border-top-color: #fff;
+      	border-width: 12px;
+      	margin-left: -12px;
+      }
+      &:before {
+      	border-color: rgba(173, 173, 173, 0);
+      	border-top-color: #adadad;
+      	border-width: 13px;
+      	margin-left: -13px;
+      }
 
       .share-button{
         padding-left: 3px;
@@ -161,7 +205,12 @@
 
     &.closed {
       a.open-close{
-        background-position: left bottom;
+        .fa-caret-square-o-down {
+          display: block;
+        }
+        .fa-caret-square-o-up {
+          display: none;
+        }
       }
       .title{
         display: table;
@@ -173,15 +222,21 @@
       }
     }
     &.left .date{
-      background: transparent url(../img/tab-left.png) no-repeat right;
-      right: -54px;
+      border-left-color: white;
+      right: -55px;
+      .shadow-cover {
+        left: -5px;
+      }
     }
     &.right{
       float: right;
 
       .date{
-        background: transparent url(../img/tab-right.png) no-repeat left;
-        left: -54px;
+        border-right-color: white;
+        left: -55px;
+        .shadow-cover {
+          right: -5px;
+        }
       }
     }
     &.last{

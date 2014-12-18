@@ -22,6 +22,11 @@
     background-color: #FFF;
     color: #3b3b3b;
 
+    .fa {
+      font-size: 16px;
+      margin-left: 4px;
+    }
+
     &.active:hover,
     &.active{
       background-color: #f6f6f6;
@@ -30,10 +35,6 @@
       -moz-box-shadow:  none;
       box-shadow:  none;
       cursor: default;
-
-      span{
-        background-position: right 4px;
-      }
     }
     &:hover{
       -webkit-box-shadow:  0px 1px 1px 0px #adadad;
@@ -42,18 +43,15 @@
     }
     &.expand-all span,
     &.sort-newest span{
-      background-image: url(../img/up-arrows.png);
-      background-repeat: no-repeat;
+      .fa-caret-down {
+        display: none;
+      }
     }
     &.collapse-all span,
     &.sort-oldest span{
-      background-image: url(../img/down-arrows.png);
-      background-repeat: no-repeat;
-    }
-
-    span{
-      padding-right: 15px;
-      background-position: right -20px;
+      .fa-caret-up {
+        display: none;
+      }
     }
   }
 }
